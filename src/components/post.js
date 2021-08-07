@@ -14,6 +14,16 @@ const Post = (props) => {
     history.push("/posts");
   };
 
+  const handleDelete = () => {
+    let res = axios
+      .delete(
+        `https://jsonplaceholder.typicode.com/posts/${props.match.params.id}`
+      )
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+    //history.push("/posts");
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -54,7 +64,7 @@ const Post = (props) => {
                   <Button
                     variant="danger"
                     style={{ marginLeft: "5px" }}
-                    onClick={handleClick}
+                    onClick={handleDelete}
                   >
                     Delete Post
                   </Button>
