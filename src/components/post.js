@@ -51,7 +51,11 @@ const Post = (props) => {
                 </div>
                 <div className="buttons">
                   <Button onClick={handleClick}>Go Home</Button>
-                  <Button style={{ marginLeft: "5px" }} onClick={handleClick}>
+                  <Button
+                    variant="danger"
+                    style={{ marginLeft: "5px" }}
+                    onClick={handleClick}
+                  >
                     Delete Post
                   </Button>
                 </div>
