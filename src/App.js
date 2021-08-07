@@ -8,7 +8,7 @@ import Post from "./components/post";
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="App">
         <Switch>
           <Route exact path={["/", "/Posts"]} component={Posts} />
           <Route path="/post/:id" component={Post} />
