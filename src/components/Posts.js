@@ -9,7 +9,6 @@ import Modal from "react-bootstrap/Modal";
 import img from "../assets/index.png";
 import { Link } from "react-router-dom";
 import { setPosts, selectPosts } from "../redux/features/userSlice";
-import Post from "./post";
 
 function MyVerticallyCenteredModal(props) {
   const [title, setTitle] = useState();
@@ -70,7 +69,6 @@ function MyVerticallyCenteredModal(props) {
     </Modal>
   );
 }
-//props.onHide
 
 function Posts() {
   const [modalShow, setModalShow] = useState(false);

@@ -21,7 +21,7 @@ const Post = (props) => {
       )
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
-    //history.push("/posts");
+    history.push("/posts");
   };
 
   useEffect(() => {
