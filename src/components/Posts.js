@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import img from "../assets/index.jpeg";
+import img from "../assets/index.png";
 import { Link } from "react-router-dom";
 import { setPosts, selectPosts } from "../redux/features/userSlice";
 import Post from "./post";
@@ -14,8 +14,28 @@ import Post from "./post";
 function MyVerticallyCenteredModal(props) {
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
+  const { posts } = props;
+  //const dispatch = useDispatch();
   console.log(title);
   console.log(body);
+  console.log(posts);
+
+  const saveHandler = async () => {
+    console.log("save handler");
+    props.onHide();
+    let data = {
+      title: title,
+      body: body,
+    };
+
+    await axios
+      .post("https://jsonplaceholder.typicode.com/posts/", data)
+      .then((response) => {
+        console.log(response);
+
+        //dispatch(setPosts(response));
+      });
+  };
   return (
     <Modal
       {...props}
@@ -45,15 +65,16 @@ function MyVerticallyCenteredModal(props) {
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Save</Button>
+        <Button onClick={saveHandler}>Save</Button>
       </Modal.Footer>
     </Modal>
   );
 }
+//props.onHide
 
 function Posts() {
   const [modalShow, setModalShow] = useState(false);
-  //const [state, setState] = useState([]);
+  const [state, setState] = useState([]);
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
   useEffect(() => {
@@ -64,6 +85,7 @@ function Posts() {
           //setState(response);
           console.log("fetched");
           dispatch(setPosts(response));
+          setState.push(posts);
         })
         .catch((e) => console.log(e));
   }, []);
@@ -72,11 +94,13 @@ function Posts() {
     <div className="Posts">
       <div>
         <Container>
+          {console.log(state)}
           <h1>Posts</h1>
           <Button onClick={() => setModalShow(true)}>Add New Post</Button>
           <MyVerticallyCenteredModal
             show={modalShow}
             onHide={() => setModalShow(false)}
+            posts={posts}
           />
           <Row>
             {console.log(posts)}
@@ -97,7 +121,7 @@ function Posts() {
                     {post.title}
                     <Link
                       to={"/post/" + post.id}
-                      onClick={() => <Post title={post.title} />}
+                      style={{ textDecoration: "none" }}
                     >
                       See more
                     </Link>

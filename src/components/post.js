@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
-import img from "../assets/index.jpeg";
+import img from "../assets/index.png";
 import axios from "axios";
 
 const Post = (props) => {
@@ -41,13 +41,10 @@ const Post = (props) => {
     <div>
       {show ? (
         <Container>
-          <div
-            className="card mb-3"
-            style={{ width: "1000px", marginLeft: "45px" }}
-          >
+          <div className="card mb-3">
             <div className="row gutters">
               <div className="col-md-4">
-                <img alt="dada" src={img} />
+                <img alt="dada" src={img} style={{ width: "300px" }} />
               </div>
               <div className="col-md-8">
                 <div className="card-body">
